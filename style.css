@@ -10,7 +10,12 @@ h1 {
   margin: 0 auto;
   padding: 50 px;
 }
-title {
+p1 {
+  font-size: 40 px;
+  color: darkblue;
+}
+
+bloco1 {
   font-size: 40 px;
   color: darkblue;
 }
