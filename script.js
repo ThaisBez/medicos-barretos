@@ -1,5 +1,6 @@
 let medicos = [];
 
+// 1. CARREGAR CSV
 fetch("dadosmedico.csv")
   .then(resposta => resposta.text())
   .then(texto => {
@@ -22,12 +23,16 @@ fetch("dadosmedico.csv")
         };
       });
 
+    // mostra tabela inicial
     mostrarTabela(medicos);
-    preencherFiltros();    
+
+    // preenche filtros
+    preencherFiltros();
   })
-  .catch(erro => console.error(erro));
+  .catch(erro => console.error("Erro ao carregar CSV:", erro));
 
 
+// 2. MOSTRAR TABELA
 function mostrarTabela(lista) {
   const tbody = document.querySelector("#resultado tbody");
   tbody.innerHTML = "";
@@ -44,6 +49,9 @@ function mostrarTabela(lista) {
     `;
   });
 }
+
+
+// 3. PREENCHER FILTROS (SEM DUPLICAR)
 function preencherFiltros() {
   const locais = [...new Set(medicos.map(m => m.local))];
   const especialidades = [...new Set(medicos.map(m => m.especialidade))];
@@ -65,8 +73,13 @@ function preencherFiltros() {
     selectPer.innerHTML += `<option value="${p}">${p}</option>`;
   });
 }
+
+
+// 4. EVENTO DO BOTÃO
 document.getElementById("buscar").addEventListener("click", filtrar);
 
+
+// 5. FILTRO
 function filtrar() {
   const local = document.getElementById("local").value;
   const especialidade = document.getElementById("especialidade").value;
@@ -74,44 +87,23 @@ function filtrar() {
 
   let filtrados = medicos;
 
-  if (local !== "") {
+  if (local) {
     filtrados = filtrados.filter(m =>
       m.local?.trim().toLowerCase() === local.trim().toLowerCase()
     );
   }
 
-  if (especialidade !== "") {
+  if (especialidade) {
     filtrados = filtrados.filter(m =>
       m.especialidade?.trim().toLowerCase() === especialidade.trim().toLowerCase()
     );
   }
 
-  if (periodo !== "") {
+  if (periodo) {
     filtrados = filtrados.filter(m =>
       m.periodo?.trim().toLowerCase() === periodo.trim().toLowerCase()
     );
   }
 
   mostrarTabela(filtrados);
-}
-function preencherFiltros() {
-  const locais = [...new Set(medicos.map(m => m.local))];
-  const especialidades = [...new Set(medicos.map(m => m.especialidade))];
-  const periodos = [...new Set(medicos.map(m => m.periodo))];
-
-  const selectLocal = document.getElementById("local");
-  const selectEsp = document.getElementById("especialidade");
-  const selectPer = document.getElementById("periodo");
-
-  locais.forEach(l => {
-    selectLocal.innerHTML += `<option value="${l}">${l}</option>`;
-  });
-
-  especialidades.forEach(e => {
-    selectEsp.innerHTML += `<option value="${e}">${e}</option>`;
-  });
-
-  periodos.forEach(p => {
-    selectPer.innerHTML += `<option value="${p}">${p}</option>`;
-  });
 }
