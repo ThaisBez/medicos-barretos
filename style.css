@@ -18,8 +18,47 @@ h1 {
   margin-top: 20px;
 }
 
-bloco1 {
-  font-size: 40px;
-  color: darkblue;
+/* ===== TABELA ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  background: #fff;
+}
+
+/* Cabeçalho */
+thead {
+  background-color: #2f5d8a;
+  color: white;
+}
+
+th {
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+  border: 1px solid #ddd;
+}
+
+/* Linhas */
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Linhas alternadas */
+tbody tr:nth-child(even) {
+  background-color: #f5f7fa;
+}
+
+/* Hover na linha */
+tbody tr:hover {
+  background-color: #e3f2fd;
+  transition: 0.2s;
+}
+
+/* Bordas gerais mais suaves */
+table, th, td {
+  border-color: #cfd8dc;
 }
 
