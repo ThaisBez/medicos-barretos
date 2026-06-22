@@ -65,3 +65,32 @@ function preencherFiltros() {
     selectPer.innerHTML += `<option value="${p}">${p}</option>`;
   });
 }
+document.getElementById("buscar").addEventListener("click", filtrar);
+
+function filtrar() {
+  const local = document.getElementById("local").value;
+  const especialidade = document.getElementById("especialidade").value;
+  const periodo = document.getElementById("periodo").value;
+
+  let filtrados = medicos;
+
+  if (local !== "") {
+    filtrados = filtrados.filter(m =>
+      m.local?.trim().toLowerCase() === local.trim().toLowerCase()
+    );
+  }
+
+  if (especialidade !== "") {
+    filtrados = filtrados.filter(m =>
+      m.especialidade?.trim().toLowerCase() === especialidade.trim().toLowerCase()
+    );
+  }
+
+  if (periodo !== "") {
+    filtrados = filtrados.filter(m =>
+      m.periodo?.trim().toLowerCase() === periodo.trim().toLowerCase()
+    );
+  }
+
+  mostrarTabela(filtrados);
+}
