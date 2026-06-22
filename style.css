@@ -17,7 +17,7 @@ h1 {
   text-align: center;
   margin-top: 20px;
 }
-.filtros {
+.filtros select {
 font-size: 16px;
 color: #222f65;
 font-weight: 500;
