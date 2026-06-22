@@ -23,6 +23,7 @@ fetch("dadosmedico.csv")
       });
 
     mostrarTabela(medicos);
+    preencherFiltros();    
   })
   .catch(erro => console.error(erro));
 
@@ -41,5 +42,26 @@ function mostrarTabela(lista) {
         <td>${item.entrada} - ${item.saida}</td>
       </tr>
     `;
+  });
+}
+function preencherFiltros() {
+  const locais = [...new Set(medicos.map(m => m.local))];
+  const especialidades = [...new Set(medicos.map(m => m.especialidade))];
+  const periodos = [...new Set(medicos.map(m => m.periodo))];
+
+  const selectLocal = document.getElementById("local");
+  const selectEsp = document.getElementById("especialidade");
+  const selectPer = document.getElementById("periodo");
+
+  locais.forEach(l => {
+    selectLocal.innerHTML += `<option value="${l}">${l}</option>`;
+  });
+
+  especialidades.forEach(e => {
+    selectEsp.innerHTML += `<option value="${e}">${e}</option>`;
+  });
+
+  periodos.forEach(p => {
+    selectPer.innerHTML += `<option value="${p}">${p}</option>`;
   });
 }
