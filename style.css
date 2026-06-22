@@ -53,7 +53,7 @@ tbody tr:nth-child(even) {
 
 /* Hover na linha */
 tbody tr:hover {
-  background-color: #e3f2fd;
+  background-color: #DFDFD7;
   transition: 0.2s;
 }
 
