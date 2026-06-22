@@ -107,3 +107,45 @@ function filtrar() {
 
   mostrarTabela(filtrados);
 }
+// 6. RESPONSIVO PARA CELULAR
+@media (max-width: 768px) {
+
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .sub1 {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  /* Filtros em coluna */
+  .filtros {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  select, button {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  /* Tabela vira "scroll horizontal" */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
