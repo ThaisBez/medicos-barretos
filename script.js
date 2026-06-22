@@ -17,6 +17,7 @@ fetch("dadosmedico.csv")
           local: colunas[0]?.trim(),
           medico: colunas[3]?.trim(),
           especialidade: colunas[4]?.trim(),
+          dia: colunas[5]?.trim(),
           periodo: colunas[6]?.trim(),
           entrada: colunas[7]?.trim(),
           saida: colunas[8]?.trim()
@@ -43,6 +44,7 @@ function mostrarTabela(lista) {
         <td>${item.local}</td>
         <td>${item.medico}</td>
         <td>${item.especialidade}</td>
+        <td>${item.dia}</td>
         <td>${item.periodo}</td>
         <td>${item.entrada} - ${item.saida}</td>
       </tr>
@@ -53,12 +55,15 @@ function mostrarTabela(lista) {
 
 // 3. PREENCHER FILTROS (SEM DUPLICAR)
 function preencherFiltros() {
+
   const locais = [...new Set(medicos.map(m => m.local))];
   const especialidades = [...new Set(medicos.map(m => m.especialidade))];
+  const dias = [...new Set(medicos.map(m => m.dia))];
   const periodos = [...new Set(medicos.map(m => m.periodo))];
 
   const selectLocal = document.getElementById("local");
   const selectEsp = document.getElementById("especialidade");
+  const selectDia = document.getElementById("dia");
   const selectPer = document.getElementById("periodo");
 
   locais.forEach(l => {
@@ -67,6 +72,10 @@ function preencherFiltros() {
 
   especialidades.forEach(e => {
     selectEsp.innerHTML += `<option value="${e}">${e}</option>`;
+  });
+
+  dias.forEach(d => {
+    selectDia.innerHTML += `<option value="${d}">${d}</option>`;
   });
 
   periodos.forEach(p => {
@@ -81,8 +90,10 @@ document.getElementById("buscar").addEventListener("click", filtrar);
 
 // 5. FILTRO
 function filtrar() {
+
   const local = document.getElementById("local").value;
   const especialidade = document.getElementById("especialidade").value;
+  const dia = document.getElementById("dia").value;
   const periodo = document.getElementById("periodo").value;
 
   let filtrados = medicos;
@@ -99,6 +110,12 @@ function filtrar() {
     );
   }
 
+  if (dia) {
+    filtrados = filtrados.filter(m =>
+      m.dia?.trim().toLowerCase() === dia.trim().toLowerCase()
+    );
+  }
+
   if (periodo) {
     filtrados = filtrados.filter(m =>
       m.periodo?.trim().toLowerCase() === periodo.trim().toLowerCase()
@@ -107,3 +124,4 @@ function filtrar() {
 
   mostrarTabela(filtrados);
 }
+
